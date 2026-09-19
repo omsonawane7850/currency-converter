@@ -15,7 +15,7 @@ body {
   background-color: white;
   width: 55%;
   min-width: 550px;
-  padding: 50px;
+  padding: 25px;
   border-radius: 8px;
   position: relative;
   margin: 100px auto;
@@ -31,13 +31,13 @@ body {
 .card h1 {
   font-size: 30px;
   font-weight: 600;
-  margin: 20px 0 30px 0;
+  margin: 5px 0 32px 54px;
 }
 
-/* Three currency fields */
+/* Currency fields */
 .currency-exchange {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .input-container {
@@ -72,8 +72,8 @@ body {
 /* Output */
 .output {
   width: 100%;
-  margin-top: 35px;
-  padding: 20px;
+  margin-top: 20px;
+  padding: 15px 20px;
   border-radius: 8px;
   background-color: #f1fafa;
   border: 1px solid #4cd2d2;
@@ -87,7 +87,7 @@ body {
 }
 
 .output p b {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   color: #159999;
 }

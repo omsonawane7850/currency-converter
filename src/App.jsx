@@ -11,7 +11,7 @@ function App() {
       <div className="currency-exchange">
         {/* Amount */}
         <div className="input-container">
-          <label htmlFor="amount">Amount:</label>
+          <label htmlFor="amount">Amount -</label>
 
           <input
             type="number"
@@ -23,7 +23,7 @@ function App() {
 
         {/* From Currency */}
         <div className="input-container">
-          <label htmlFor="from-currency">From Currency:</label>
+          <label htmlFor="from-currency">From Currency -</label>
 
           <select
             name="from-currency"
@@ -37,7 +37,7 @@ function App() {
 
         {/* To Currency */}
         <div className="input-container">
-          <label htmlFor="to-currency">To Currency:</label>
+          <label htmlFor="to-currency">To Currency -</label>
 
           <select name="to-currency" id="to-currency" className="common-input">
             <option value="INR">INR</option>
