@@ -1,6 +1,7 @@
 import logo from "/public/godsfavoritearts-money-bag-14140.gif";
 import "./App.css";
 import { useEffect, useState } from "react";
+import CurrencyExchange from "./components/CurrencyExchange";
 
 function App() {
   const [amount, setAmount] = useState(1);
@@ -9,30 +10,29 @@ function App() {
   const [exchangeRate, setExchangeRate] = useState({});
 
   const API_KEY = import.meta.env.VITE_CURRENCY_API_ID;
-  // console.log(API_KEY);
+
   useEffect(() => {
     const fetchExchangeRate = async () => {
       const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurrency}`;
 
       try {
         const response = await fetch(url);
-        // console.log(response);
-
         const data = await response.json();
-        // console.log(data);
 
         setExchangeRate(data);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchExchangeRate();
   }, [fromCurrency]);
 
   const rate = exchangeRate.conversion_rates?.[toCurrency];
+
   const convertedAmount = (amount * (rate || 0)).toFixed(2);
 
-  useEffect(() => {}, []);
+  const currencies = Object.keys(exchangeRate.conversion_rates || {});
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -58,69 +58,18 @@ function App() {
 
       <h1>Currency Converter</h1>
 
-      <div className="currency-exchange">
-        {/* Amount */}
-        <div className="input-container">
-          <label htmlFor="amount">Amount -</label>
-
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            className="common-input"
-            value={amount}
-            onChange={handleOnChange}
-          />
-        </div>
-
-        {/* From Currency */}
-        <div className="input-container">
-          <label htmlFor="from-currency">From Currency -</label>
-
-          <select
-            name="from-currency"
-            id="from-currency"
-            className="common-input"
-            value={fromCurrency}
-            onChange={handleOnChange}
-          >
-            {Object.keys(exchangeRate.conversion_rates || {}).map(
-              (currency) => (
-                <option value={currency} key={currency}>
-                  {currency}
-                </option>
-              ),
-            )}
-          </select>
-        </div>
-
-        {/* To Currency */}
-        <div className="input-container">
-          <label htmlFor="to-currency">To Currency -</label>
-
-          <select
-            name="to-currency"
-            id="to-currency"
-            className="common-input"
-            value={toCurrency}
-            onChange={handleOnChange}
-          >
-            {Object.keys(exchangeRate.conversion_rates || {}).map(
-              (currency) => (
-                <option value={currency} key={currency}>
-                  {currency}
-                </option>
-              ),
-            )}
-          </select>
-        </div>
-      </div>
+      <CurrencyExchange
+        amount={amount}
+        fromCurrency={fromCurrency}
+        toCurrency={toCurrency}
+        currencies={currencies}
+        onChange={handleOnChange}
+      />
 
       <div className="output">
         <p>
           Converted Amount:{" "}
           <b>
-            {" "}
             {amount} {fromCurrency} = {convertedAmount} {toCurrency}
           </b>
         </p>
